@@ -2,29 +2,34 @@ package com.plox.esportsystem.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
+import com.plox.esportsystem.factories.AbstractFactory;
+import com.plox.esportsystem.factories.FactoryProducer;
+import com.plox.esportsystem.main.ControllerType;
+import com.plox.esportsystem.main.Type;
 import com.plox.esportsystem.model.entities.User;
 import com.plox.esportsystem.model.entities.UserManager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-class WelcomeController implements Initializable, Controller {
+class WelcomeController implements Controller {
 
 	private Parent parent;
     private Scene scene;
     
-    @SuppressWarnings("unused")
 	private Stage stage;
     
     private String fxml;
@@ -37,6 +42,8 @@ class WelcomeController implements Initializable, Controller {
     private PasswordField passwordField;
     @FXML
     private Button signinButton;
+    @FXML
+    private Label alertLabel;
     
     
     private final static WelcomeController INSTANCE = new WelcomeController();
@@ -49,13 +56,33 @@ class WelcomeController implements Initializable, Controller {
     public void signinButton()
     {
     	signinButton.setOnAction((e) -> {
-    		/*Iterator<User> iterator = userManager.getAll().iterator();
-    		while(iterator.hasNext())
+    		
+    		User user = userManager.verify(loginField.getText(), passwordField.getText());
+    		
+    		if(user != null)
     		{
-    			User user = iterator.next();
-    			System.out.println(user.getId()+user.getLogin()+user.getPassword()+user.getEmail()+user.getLast_login_date());
-    		}*/
-    		//System.out.println(userManager.get(2).getId());
+    			if(loginField.getText().equals("admin"))
+    			{
+	    			AbstractFactory ControllerFactory = FactoryProducer.getFactory(Type.Controller);
+	    			Controller controller = ControllerFactory.getController(ControllerType.AdminDashboard);
+	    			((AdminDashboardController) controller).setUserEmail(user.getEmail());
+	    			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    			Date date = new Date();
+	    			userManager.edit(user.getId(), "lastlogin", dateFormat.format(date));
+	    			controller.show(stage, "../view/AdminDashboardScreen.fxml", "com/plox/esportsystem/supply/application.css", user.getId());
+    			}
+    			else
+    			{
+    				alertLabel.setTextFill(javafx.scene.paint.Color.RED);
+        			alertLabel.setText("To nie jest konto administratora");
+    			}
+    		}
+    		else
+    		{
+    			alertLabel.setTextFill(javafx.scene.paint.Color.RED);
+    			alertLabel.setText("błąd");
+    		}
+    		
     	});	
     }
     
@@ -80,7 +107,7 @@ class WelcomeController implements Initializable, Controller {
     }
  
     @Override
-    public void show(Stage stage,String fxml,String style) {
+    public void show(Stage stage,String fxml,String style, int UserID) {
         this.stage = stage;
         this.fxml = fxml;
         this.style = style;
@@ -94,5 +121,4 @@ class WelcomeController implements Initializable, Controller {
     public void initialize(URL location, ResourceBundle resources) {
         // TODO Auto-generated method stub
     }
-
 }

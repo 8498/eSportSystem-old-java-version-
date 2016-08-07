@@ -6,7 +6,7 @@ public interface EntityManager{
 	
 	public ArrayList<?> getAll();
 	
-	public User get(int id);
+	public Object get(int id);
 	
 	public void create(ArrayList<String> data);
 	

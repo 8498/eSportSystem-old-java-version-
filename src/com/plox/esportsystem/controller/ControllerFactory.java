@@ -2,8 +2,8 @@ package com.plox.esportsystem.controller;
 
 import com.plox.esportsystem.factories.AbstractFactory;
 import com.plox.esportsystem.main.ControllerType;
-import com.plox.esportsystem.main.EntityType;
-import com.plox.esportsystem.model.entities.Entity;
+import com.plox.esportsystem.main.PaneType;
+
 
 public class ControllerFactory extends AbstractFactory {
 
@@ -15,13 +15,15 @@ public class ControllerFactory extends AbstractFactory {
 		{
 			case Welcome:
 				return controller = WelcomeController.getInstance();
+			case AdminDashboard:
+				return controller = AdminDashboardController.getInstance();
 			default:
 				return null;
 		}
 	}
 
 	@Override
-	public Entity getEntity(EntityType type) {
+	public ControllerPane getController(PaneType type) {
 		// TODO Auto-generated method stub
 		return null;
 	}

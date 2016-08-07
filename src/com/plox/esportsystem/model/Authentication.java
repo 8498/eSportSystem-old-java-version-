@@ -2,8 +2,17 @@ package com.plox.esportsystem.model;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Iterator;
+
+import com.plox.esportsystem.model.entities.User;
+import com.plox.esportsystem.model.entities.UserManager;
+
+import javafx.stage.Stage;
 
 public class Authentication {
+	
+	private Stage stage;
+	
 	public String hash(String password) 
 	{
 			MessageDigest messagedigest;

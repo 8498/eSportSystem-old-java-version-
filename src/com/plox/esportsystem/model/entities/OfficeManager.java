@@ -4,66 +4,57 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import com.plox.esportsystem.model.Authentication;
 import com.plox.esportsystem.supply.Connection;
 
-public class UserManager implements EntityManager {
-	
+public class OfficeManager implements EntityManager {
+
 	Connection connection = new Connection();
-	Authentication auth = new Authentication();
 	Statement stmt;
 	String query;
 	
-	public UserManager(){}
-
-	public ArrayList<User> getAll() {
-		ArrayList<User> userList = new ArrayList<User>();
+	@Override
+	public ArrayList<Office> getAll() {
+ArrayList<Office> officeList = new ArrayList<Office>();
 		
 		connection.createConnection();
 		try {
 			stmt = connection.con.createStatement();
-			query = "SELECT * FROM users";
+			query = "SELECT * FROM offices ";
 			ResultSet rs = stmt.executeQuery(query);
 			
 			while(rs.next())
 			{
-				User user = new User();
+				Office office = new Office();
 			
-				user.setId(rs.getInt("id"));
-				user.setLogin(rs.getString("login"));
-				user.setEmail(rs.getString("email"));
-				user.setPassword(rs.getString("password"));
-				user.setLast_login_date(rs.getTimestamp("lastlogin"));
+				office.setId(rs.getInt("id"));
+				office.setName(rs.getString("name"));
 				
-				userList.add(user);
+				officeList.add(office);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		connection.closeConnection();
-		return userList;
+		return officeList;
 	}
 
-	public User get(int id) {
+	@Override
+	public Office get(int id) {
 		connection.createConnection();
 		
-		User user = new User();
+		Office office = new Office();
 		
 		try {
 			stmt = connection.con.createStatement();
-			query = "SELECT * FROM users WHERE id='"+id+"'";
+			query = "SELECT * FROM offices WHERE id='"+id+"'";
 			ResultSet rs = stmt.executeQuery(query);
 			
 			while(rs.next())
 			{
-				user.setId(rs.getInt("id"));
-				user.setLogin(rs.getString("login"));
-				user.setEmail(rs.getString("email"));
-				user.setPassword(rs.getString("password"));
-				user.setLast_login_date(rs.getTimestamp("lastlogin"));
+				office.setId(rs.getInt("id"));
+				office.setName(rs.getString("name"));
 			}
 			
 		} catch (SQLException e) {
@@ -71,18 +62,17 @@ public class UserManager implements EntityManager {
 			e.printStackTrace();
 		}
 		connection.closeConnection();
-		return user;
+		return office;
 	}
 
+	@Override
 	public void create(ArrayList<String> data) {
-		String login = data.get(0);
-		String email = data.get(1);
-		String password = auth.hash(data.get(2));
+		String name = data.get(0);
 		
 		connection.createConnection();
 		try {
 			stmt = connection.con.createStatement();
-			query = "INSERT INTO `users` (`login`, `email`, `password`) VALUES ('"+login+"','"+email+"','"+password+"')";
+			query = "INSERT INTO `offices` (`name`) VALUES ('"+name+"')";
 			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -90,50 +80,37 @@ public class UserManager implements EntityManager {
 		}
 		connection.closeConnection();
 	}
-	
+
+	@Override
 	public void edit(int id, String columnName, Object value) {
 		connection.createConnection();
 		
 		try {
 			stmt = connection.con.createStatement();
-			query = "UPDATE `users` SET `"+columnName+"`='"+value+"'WHERE id='"+id+"'";
+			query = "UPDATE `offices` SET `"+columnName+"`='"+value+"'WHERE id='"+id+"'";
 			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		connection.closeConnection();
+
 	}
 
+	@Override
 	public void delete(int id) {
 		connection.createConnection();
 		
 		try {
 			stmt = connection.con.createStatement();
-			query = "DELETE FROM `users` WHERE id='"+id+"'";
+			query = "DELETE FROM `offices` WHERE id='"+id+"'";
 			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		connection.closeConnection();
+
 	}
-	
-	User loggedUser;
-	public User verify (String login, String password){
-		Iterator<User> iterator = getAll().iterator();
-		while(iterator.hasNext())
-		{
-			User user = (User) iterator.next();
-			if(auth.hash(password).equals(user.getPassword()))
-			{
-				if(login.equals(user.getLogin()))
-				{
-					loggedUser = user;
-					break;
-				}
-			}
-		}
-		return loggedUser;
-	}
+
 }

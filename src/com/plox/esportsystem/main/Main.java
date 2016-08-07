@@ -13,7 +13,7 @@ public class Main extends Application {
 	public void start(Stage stage){
 		AbstractFactory ControllerFactory = FactoryProducer.getFactory(Type.Controller);
 		Controller controller = ControllerFactory.getController(ControllerType.Welcome);
-		controller.show(stage, "../view/WelcomeScreen.fxml", "com/plox/esportsystem/supply/application.css");
+		controller.show(stage, "../view/WelcomeScreen.fxml", "com/plox/esportsystem/supply/application.css", 0);
 	}
 	
 	public static void main(String[] args) {
