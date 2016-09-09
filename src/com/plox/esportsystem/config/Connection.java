@@ -1,4 +1,4 @@
-package com.plox.esportsystem.supply;
+package com.plox.esportsystem.config;
 
 import java.sql.DriverManager;
 

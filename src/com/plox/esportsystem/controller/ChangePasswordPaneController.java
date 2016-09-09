@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.plox.esportsystem.model.Authentication;
+import com.plox.esportsystem.services.Authentication;
 import com.plox.esportsystem.model.entities.UserManager;
 
 import javafx.fxml.FXML;

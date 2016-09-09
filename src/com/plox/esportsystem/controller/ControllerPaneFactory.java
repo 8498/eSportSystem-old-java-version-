@@ -15,7 +15,8 @@ public class ControllerPaneFactory extends AbstractFactory {
 
 	@Override
 	public ControllerPane getController(PaneType type) {
-		ControllerPane controllerPane;
+		ControllerPane controllerPane = null;
+		try{
 		switch (type)
 		{
 			case ChangeEmail:
@@ -24,9 +25,16 @@ public class ControllerPaneFactory extends AbstractFactory {
 				return controllerPane = ChangePasswordPaneController.getInstance();
 			case usersTablePane:
 				return controllerPane = userTablePaneController.getInstance();
+			case employeesTablePane:
+				return controllerPane = employeesTablePaneController.getInstance();
 			default:
-				return null;
+				
 		}
+		}catch(Exception e)
+		{
+			System.err.println(e);
+		}
+		return controllerPane;
 	}
 
 }

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.plox.esportsystem.supply.Connection;
+import com.plox.esportsystem.config.Connection;
 
 public class EmployeeManager implements EntityManager {
 
@@ -22,8 +22,8 @@ public class EmployeeManager implements EntityManager {
 		connection.createConnection();
 		try {
 			stmt = connection.con.createStatement();
-			query = "SELECT * FROM employees "
-					+ "INNER JOIN office_employee ON employees.id = office_employee.employee_id"
+			query = "SELECT employees.id as employeeID,firstname, lastname, email, birthdate, phone, offices.name as officename FROM employees "
+					+ "INNER JOIN office_employee ON employees.id = office_employee.employee_id "
 					+ "INNER JOIN offices ON office_employee.office_id = offices.id";
 			ResultSet rs = stmt.executeQuery(query);
 			
@@ -31,13 +31,13 @@ public class EmployeeManager implements EntityManager {
 			{
 				Employee employee = new Employee();
 			
-				employee.setId(rs.getInt("id"));
+				employee.setId(rs.getInt("employeeID"));
 				employee.setFirstname(rs.getString("firstname"));
 				employee.setLastname(rs.getString("lastname"));
 				employee.setEmail(rs.getString("email"));
 				employee.setBirthdate(rs.getDate("birthdate"));
 				employee.setPhone(rs.getInt("phone"));
-				employee.setOffice_name(rs.getString("name"));
+				employee.setOffice_name(rs.getString("officename"));
 				
 				employeeList.add(employee);
 			}

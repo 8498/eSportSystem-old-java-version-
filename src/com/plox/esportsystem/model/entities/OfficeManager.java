@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.plox.esportsystem.supply.Connection;
+import com.plox.esportsystem.config.Connection;
 
 public class OfficeManager implements EntityManager {
 

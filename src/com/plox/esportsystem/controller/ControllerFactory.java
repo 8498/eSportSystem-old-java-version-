@@ -9,17 +9,22 @@ public class ControllerFactory extends AbstractFactory {
 
 	@Override
 	public Controller getController(ControllerType type) {
-		@SuppressWarnings("unused")
-		Controller controller;
-		switch (type)
+		Controller controller = null;
+		try{
+			switch (type)
+			{
+				case Welcome:
+					return controller = WelcomeController.getInstance();
+				case AdminDashboard:
+					return controller = AdminDashboardController.getInstance();
+				default:
+					
+			}
+		}catch(Exception e)
 		{
-			case Welcome:
-				return controller = WelcomeController.getInstance();
-			case AdminDashboard:
-				return controller = AdminDashboardController.getInstance();
-			default:
-				return null;
+			System.err.println(e);
 		}
+		return controller;
 	}
 
 	@Override

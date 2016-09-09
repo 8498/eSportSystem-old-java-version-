@@ -24,12 +24,10 @@ public class userTablePaneController implements ControllerPane, Initializable {
 		return INSTANCE;
 	}
 
-	private int userID;
 	private Pane newpane;
 	
 	@Override
 	public void generatePane(Pane pane, String fxml, String style, int userID) {
-		this.userID = userID;
 		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource(fxml));
         fxmlloader.setController(this);
         
@@ -53,6 +51,7 @@ public class userTablePaneController implements ControllerPane, Initializable {
 
 	}
 	
+	@SuppressWarnings("unchecked")
 	public TableView<?> getTableView()
 	{
 		UserManager userManager = new UserManager();

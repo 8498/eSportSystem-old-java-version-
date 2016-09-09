@@ -6,8 +6,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.plox.esportsystem.model.Authentication;
-import com.plox.esportsystem.supply.Connection;
+import com.plox.esportsystem.services.Authentication;
+import com.plox.esportsystem.config.Connection;
 
 public class UserManager implements EntityManager {
 	

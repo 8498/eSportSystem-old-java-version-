@@ -69,7 +69,7 @@ class WelcomeController implements Controller {
 	    			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    			Date date = new Date();
 	    			userManager.edit(user.getId(), "lastlogin", dateFormat.format(date));
-	    			controller.show(stage, "../view/AdminDashboardScreen.fxml", "com/plox/esportsystem/supply/application.css", user.getId());
+	    			controller.show(stage, "../view/AdminDashboardScreen.fxml", "com/plox/esportsystem/supply/css/application.css", user.getId());
     			}
     			else
     			{

@@ -17,7 +17,7 @@
       <PasswordField fx:id="passwordField" layoutX="326.0" layoutY="333.0" />
       <Label fx:id="loginLabel" layoutX="326.0" layoutY="252.0" text="Login" />
       <Label fx:id="passwordLabel" layoutX="326.0" layoutY="310.0" text="Hasło" />
-      <Button fx:id="signinButton" layoutX="374.0" layoutY="378.0" mnemonicParsing="false" text="Sign in" />
+      <Button fx:id="signinButton" layoutX="374.0" layoutY="378.0" mnemonicParsing="false" text="Zaloguj" />
       <Label fx:id="alertLabel" layoutX="354.0" layoutY="428.0" />
    </children>
 </AnchorPane>

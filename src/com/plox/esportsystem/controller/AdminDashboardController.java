@@ -47,6 +47,8 @@ public class AdminDashboardController implements Controller {
 	private Label changePasswordLabel;
 	@FXML
 	private Label usersTableLabel;
+	@FXML
+	private Label employeesTableLabel;
 	
 	public AdminDashboardController(){}
 	
@@ -56,7 +58,7 @@ public class AdminDashboardController implements Controller {
 			CenterPane.getChildren().clear();
 			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
 			ControllerPane controller = ControllerPaneFactory.getController(PaneType.ChangeEmail);
-			controller.generatePane(CenterPane, "../view/changeEmailPane.fxml", "com/plox/esportsystem/supply/application.css", userID);
+			controller.generatePane(CenterPane, "../view/changeEmailPane.fxml", "com/plox/esportsystem/supply/css/application.css", userID);
     	});	
 	}
 	public void changePassword()
@@ -65,7 +67,7 @@ public class AdminDashboardController implements Controller {
 			CenterPane.getChildren().clear();
 			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
 			ControllerPane controller = ControllerPaneFactory.getController(PaneType.ChangePassword);
-			controller.generatePane(CenterPane, "../view/changePasswordPane.fxml", "com/plox/esportsystem/supply/application.css", userID);
+			controller.generatePane(CenterPane, "../view/changePasswordPane.fxml", "com/plox/esportsystem/supply/css/application.css", userID);
 		});
 	}
 	public void usersTable()
@@ -75,7 +77,17 @@ public class AdminDashboardController implements Controller {
 			CenterPane.getChildren().clear();
 			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
 			ControllerPane controller = ControllerPaneFactory.getController(PaneType.usersTablePane);
-			controller.generatePane(CenterPane, "../view/usersTablePane.fxml", "com/plox/esportsystem/supply/application.css", userID);
+			controller.generatePane(CenterPane, "../view/usersTablePane.fxml", "com/plox/esportsystem/supply/css/application.css", userID);
+		});
+	}
+	public void employeesTable()
+	{
+		employeesTableLabel.setOnMouseClicked((e) -> {
+			System.out.println("asd");
+			CenterPane.getChildren().clear();
+			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
+			ControllerPane controller = ControllerPaneFactory.getController(PaneType.employeesTablePane);
+			controller.generatePane(CenterPane, "../view/employeesTablePane.fxml", "com/plox/esportsystem/supply/css/application.css", userID);
 		});
 	}
 	@Override
@@ -95,6 +107,8 @@ public class AdminDashboardController implements Controller {
         changePassword();
         
         usersTable();
+        
+        employeesTable();
         
         scene = new Scene(parent);
         
