@@ -1,5 +1,5 @@
 package com.plox.esportsystem.main;
 
 public enum PaneType {
-	ChangeEmail,ChangePassword,usersTablePane, employeesTablePane
+	ChangeEmail,ChangePassword,usersTablePane, employeesTablePane, officesTablePane
 }

@@ -79,6 +79,14 @@
                                                 <Cursor fx:constant="HAND" />
                                           </cursor>
                                           </Label>
+                                          <Label fx:id="officesTableLabel" alignment="CENTER" prefHeight="17.0" prefWidth="201.0" text="Stanowiska" >
+                                          <padding>
+                                                <Insets top="5.0" />
+                                             </padding>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                          </cursor>
+                                          </Label>
                                        </children>
                                     </VBox>
                                  </children>

@@ -11,6 +11,7 @@ public class User implements Entity{
 	String email;
 	String password;
 	Date last_login_date = new Date();
+	String role_name;
 	
 	public User(){}
 
@@ -54,5 +55,12 @@ public class User implements Entity{
 		this.last_login_date = last_login_date;
 	}
 	
+	public String getRole() {
+		return role_name;
+	}
+
+	public void setRole(String role_name) {
+		this.role_name = role_name;
+	}
 	
 }

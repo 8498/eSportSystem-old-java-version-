@@ -49,6 +49,8 @@ public class AdminDashboardController implements Controller {
 	private Label usersTableLabel;
 	@FXML
 	private Label employeesTableLabel;
+	@FXML
+	private Label officesTableLabel;
 	
 	public AdminDashboardController(){}
 	
@@ -73,21 +75,28 @@ public class AdminDashboardController implements Controller {
 	public void usersTable()
 	{
 		usersTableLabel.setOnMouseClicked((e) -> {
-			System.out.println("asd");
 			CenterPane.getChildren().clear();
 			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
 			ControllerPane controller = ControllerPaneFactory.getController(PaneType.usersTablePane);
-			controller.generatePane(CenterPane, "../view/usersTablePane.fxml", "com/plox/esportsystem/supply/css/application.css", userID);
+			controller.generatePane(CenterPane, "../../view/TablePane.fxml", "com/plox/esportsystem/supply/css/application.css", userID);
 		});
 	}
 	public void employeesTable()
 	{
 		employeesTableLabel.setOnMouseClicked((e) -> {
-			System.out.println("asd");
 			CenterPane.getChildren().clear();
 			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
 			ControllerPane controller = ControllerPaneFactory.getController(PaneType.employeesTablePane);
-			controller.generatePane(CenterPane, "../view/employeesTablePane.fxml", "com/plox/esportsystem/supply/css/application.css", userID);
+			controller.generatePane(CenterPane, "../../view/TablePane.fxml", "com/plox/esportsystem/supply/css/application.css", userID);
+		});
+	}
+	public void officesTable()
+	{
+		officesTableLabel.setOnMouseClicked((e) -> {
+			CenterPane.getChildren().clear();
+			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
+			ControllerPane controller = ControllerPaneFactory.getController(PaneType.officesTablePane);
+			controller.generatePane(CenterPane, "../../view/TablePane.fxml", "com/plox/esportsystem/supply/css/application.css", userID);
 		});
 	}
 	@Override
@@ -109,6 +118,8 @@ public class AdminDashboardController implements Controller {
         usersTable();
         
         employeesTable();
+        
+        officesTable();
         
         scene = new Scene(parent);
         

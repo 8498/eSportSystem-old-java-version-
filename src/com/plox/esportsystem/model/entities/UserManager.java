@@ -24,7 +24,9 @@ public class UserManager implements EntityManager {
 		connection.createConnection();
 		try {
 			stmt = connection.con.createStatement();
-			query = "SELECT * FROM users";
+			query = "SELECT users.*,roles.name as rolename FROM users "
+					+ "INNER JOIN roles_users ON users.id = roles_users.user_id "
+					+ "INNER JOIN roles ON roles_users.role_id = roles.id";
 			ResultSet rs = stmt.executeQuery(query);
 			
 			while(rs.next())
@@ -36,6 +38,7 @@ public class UserManager implements EntityManager {
 				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
 				user.setLast_login_date(rs.getTimestamp("lastlogin"));
+				user.setRole(rs.getString("rolename"));
 				
 				userList.add(user);
 			}
@@ -78,11 +81,15 @@ public class UserManager implements EntityManager {
 		String login = data.get(0);
 		String email = data.get(1);
 		String password = auth.hash(data.get(2));
+		String role = data.get(3);
 		
 		connection.createConnection();
 		try {
 			stmt = connection.con.createStatement();
-			query = "INSERT INTO `users` (`login`, `email`, `password`) VALUES ('"+login+"','"+email+"','"+password+"')";
+			query = "INSERT INTO `users` (`login`, `email`, `password`) VALUES ('"+login+"','"+email+"','"+password+"');"
+					+ "SET @user_id = LAST_INSERT_ID();"
+					+ "SELECT id INTO @role_id FROM roles WHERE name = '"+role+"';"
+					+ "INSERT INTO `roles_users` (`user_id`,`role_id`) VALUES (@user_id,@role_id);";
 			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

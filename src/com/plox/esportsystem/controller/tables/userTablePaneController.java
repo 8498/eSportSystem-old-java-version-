@@ -1,9 +1,10 @@
-package com.plox.esportsystem.controller;
+package com.plox.esportsystem.controller.tables;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.plox.esportsystem.controller.ControllerPane;
 import com.plox.esportsystem.model.entities.User;
 import com.plox.esportsystem.model.entities.UserManager;
 
@@ -11,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -40,7 +42,8 @@ public class userTablePaneController implements ControllerPane, Initializable {
         newpane.getStylesheets().add(style);
         
         newpane.getChildren().add(getTableView());
-        
+        newpane.getChildren().add(getAddButton());
+
         pane.getChildren().add(newpane);
 
 	}
@@ -74,13 +77,31 @@ public class userTablePaneController implements ControllerPane, Initializable {
 	    lastloginCol.setCellValueFactory(
 	            new PropertyValueFactory<User, String>("last_login_date")
 	    );
+	    TableColumn<User, String> roleCol = new TableColumn<User, String>("Role");
+	    roleCol.setCellValueFactory(
+	            new PropertyValueFactory<User, String>("role")
+	    );
 	    
         
-	    usersTable.getColumns().addAll(idCol, loginCol, passwordCol, lastloginCol);
+	    usersTable.getColumns().addAll(idCol, loginCol, passwordCol, lastloginCol, roleCol);
 
 	    usersTable.setItems(user);
 	    
-	    usersTable.setPrefSize(580, 400);
+	    usersTable.setPrefSize(580, 380);
 		return usersTable;
 	}
+	
+	public Button getAddButton()
+	{
+		Button addFormButton = new Button("Dodaj");
+		
+		addFormButton.autosize();
+		addFormButton.setTranslateY(400);
+        addFormButton.setOnMouseClicked((e) -> {
+        	
+        });
+        
+		return addFormButton;
+	}
 }
+

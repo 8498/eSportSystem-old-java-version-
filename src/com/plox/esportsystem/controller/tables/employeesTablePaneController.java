@@ -1,9 +1,10 @@
-package com.plox.esportsystem.controller;
+package com.plox.esportsystem.controller.tables;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.plox.esportsystem.controller.ControllerPane;
 import com.plox.esportsystem.model.entities.Employee;
 import com.plox.esportsystem.model.entities.EmployeeManager;
 
@@ -11,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -41,6 +43,7 @@ public class employeesTablePaneController implements ControllerPane, Initializab
         newpane.getStylesheets().add(style);
         
         newpane.getChildren().add(getTableView());
+        newpane.getChildren().add(getAddButton());
         
         pane.getChildren().add(newpane);
 		
@@ -93,8 +96,20 @@ public class employeesTablePaneController implements ControllerPane, Initializab
 
 	    employeesTable.setItems(employees);
 	    
-	    employeesTable.setPrefSize(580, 400);
+	    employeesTable.setPrefSize(580, 380);;
 		return employeesTable;
 	}
 
+	public Button getAddButton()
+	{
+		Button addFormButton = new Button("Dodaj");
+		
+		addFormButton.autosize();
+		addFormButton.setTranslateY(400);
+        addFormButton.setOnMouseClicked((e) -> {
+        	
+        });
+        
+		return addFormButton;
+	}
 }
