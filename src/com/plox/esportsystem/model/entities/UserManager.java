@@ -3,7 +3,10 @@ package com.plox.esportsystem.model.entities;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import com.plox.esportsystem.services.Authentication;
@@ -82,14 +85,29 @@ public class UserManager implements EntityManager {
 		String email = data.get(1);
 		String password = auth.hash(data.get(2));
 		String role = data.get(3);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
 		
+		int user_id;
+		int role_id;
+		
+		ResultSet rs;
 		connection.createConnection();
 		try {
 			stmt = connection.con.createStatement();
-			query = "INSERT INTO `users` (`login`, `email`, `password`) VALUES ('"+login+"','"+email+"','"+password+"');"
-					+ "SET @user_id = LAST_INSERT_ID();"
-					+ "SELECT id INTO @role_id FROM roles WHERE name = '"+role+"';"
-					+ "INSERT INTO `roles_users` (`user_id`,`role_id`) VALUES (@user_id,@role_id);";
+			
+			query = "INSERT INTO `users` (`login`, `email`, `password`,`lastlogin`) VALUES ('"+login+"', '"+email+"', '"+password+"', '"+dateFormat.format(date)+"')";
+			stmt.executeUpdate(query);
+			
+			rs = stmt.executeQuery("SELECT id FROM users WHERE email = '"+email+"'");
+			rs.next();
+			user_id = rs.getInt("id");
+			
+			rs = stmt.executeQuery("SELECT id FROM roles WHERE name = '"+role+"'");
+			rs.next();
+			role_id = rs.getInt("id");
+			
+			query = "INSERT INTO `roles_users` (`user_id`,`role_id`) VALUES ("+user_id+","+role_id+")";
 			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

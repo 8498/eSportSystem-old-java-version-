@@ -1,16 +1,18 @@
-package com.plox.esportsystem.controller;
+package com.plox.esportsystem.controller.forms;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.plox.esportsystem.controller.ControllerPane;
 import com.plox.esportsystem.model.entities.UserManager;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
@@ -29,9 +31,9 @@ public class usersAddFormPane implements Initializable, ControllerPane {
 	private Label emailLabel = getLabelForm("Email:",130,110);
 	private TextField emailField = getTextfieldForm(200,110);
 	private Label passwordLabel = getLabelForm("Hasło:",130,140);
-	private TextField passwordField = getTextfieldForm(200,140);
-	private Label roleLabel = getLabelForm("Rola:",130,140);
-	private TextField roleField = getTextfieldForm(200,140);
+	private PasswordField passwordField = getPasswordfieldForm(200,140);
+	private Label roleLabel = getLabelForm("Rola:",130,170);
+	private TextField roleField = getTextfieldForm(200,170);
 	
 	private Button submitButton = getSubmitButton(240,300);
 	
@@ -92,6 +94,16 @@ public class usersAddFormPane implements Initializable, ControllerPane {
 		textfield.setLayoutY(posy);
 		
 		return textfield;
+	}
+	
+	private PasswordField getPasswordfieldForm(int posx, int posy)
+	{
+		PasswordField passwordfield = new PasswordField();
+		
+		passwordfield.setLayoutX(posx);
+		passwordfield.setLayoutY(posy);
+		
+		return passwordfield;
 	}
 	
 	private Button getSubmitButton(int posx, int posy) 

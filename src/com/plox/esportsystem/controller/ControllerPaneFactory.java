@@ -2,6 +2,7 @@ package com.plox.esportsystem.controller;
 
 import com.plox.esportsystem.controller.forms.employeesAddFormPane;
 import com.plox.esportsystem.controller.forms.officesAddFormPane;
+import com.plox.esportsystem.controller.forms.usersAddFormPane;
 import com.plox.esportsystem.controller.tables.employeesTablePaneController;
 import com.plox.esportsystem.controller.tables.officesTablePaneController;
 import com.plox.esportsystem.controller.tables.userTablePaneController;

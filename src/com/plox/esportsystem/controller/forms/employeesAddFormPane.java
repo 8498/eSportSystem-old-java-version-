@@ -23,7 +23,6 @@ import javafx.scene.layout.Pane;
 public class employeesAddFormPane implements ControllerPane, Initializable {
 
 	private final static employeesAddFormPane INSTANCE = new employeesAddFormPane();
-	
 	public static ControllerPane getInstance() {
 		return INSTANCE;
 	}

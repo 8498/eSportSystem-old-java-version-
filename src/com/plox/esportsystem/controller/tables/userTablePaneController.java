@@ -5,6 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.plox.esportsystem.controller.ControllerPane;
+import com.plox.esportsystem.factories.AbstractFactory;
+import com.plox.esportsystem.factories.FactoryProducer;
+import com.plox.esportsystem.main.PaneType;
+import com.plox.esportsystem.main.Type;
 import com.plox.esportsystem.model.entities.User;
 import com.plox.esportsystem.model.entities.UserManager;
 
@@ -42,7 +46,7 @@ public class userTablePaneController implements ControllerPane, Initializable {
         newpane.getStylesheets().add(style);
         
         newpane.getChildren().add(getTableView());
-        newpane.getChildren().add(getAddButton());
+        newpane.getChildren().add(getAddButton(pane));
 
         pane.getChildren().add(newpane);
 
@@ -91,14 +95,17 @@ public class userTablePaneController implements ControllerPane, Initializable {
 		return usersTable;
 	}
 	
-	public Button getAddButton()
+	public Button getAddButton(Pane CenterPane)
 	{
 		Button addFormButton = new Button("Dodaj użytkownika");
 		
 		addFormButton.autosize();
 		addFormButton.setTranslateY(400);
         addFormButton.setOnMouseClicked((e) -> {
-        	
+        	CenterPane.getChildren().clear();
+			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
+			ControllerPane controller = ControllerPaneFactory.getController(PaneType.usersAddFormPane);
+			controller.generatePane(CenterPane, "../../view/addFormPane.fxml", "com/plox/esportsystem/supply/css/application.css", 0);
         });
         
 		return addFormButton;
