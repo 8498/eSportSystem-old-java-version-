@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.plox.esportsystem.config.Connection;
 
@@ -16,7 +17,7 @@ public class RoleManager implements EntityManager {
 	public RoleManager(){}
 	
 	@Override
-	public ArrayList<?> getAll() {
+	public ArrayList<Role> getAll() {
 		ArrayList<Role> roleList = new ArrayList<Role>();
 		
 		connection.createConnection();
@@ -114,6 +115,18 @@ public class RoleManager implements EntityManager {
 		}
 		connection.closeConnection();
 
+	}
+	
+	public ArrayList<String> getAllName()
+	{
+		Iterator<Role> iterator = getAll().iterator();
+		ArrayList<String> arraylist = new ArrayList<String>();
+		
+		while(iterator.hasNext())
+		{
+			arraylist.add(iterator.next().getName());
+		}
+		return arraylist;
 	}
 
 }

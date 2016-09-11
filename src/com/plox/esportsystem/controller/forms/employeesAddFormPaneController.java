@@ -20,9 +20,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public class employeesAddFormPane implements ControllerPane, Initializable {
+public class employeesAddFormPaneController implements ControllerPane, Initializable {
 
-	private final static employeesAddFormPane INSTANCE = new employeesAddFormPane();
+	private final static employeesAddFormPaneController INSTANCE = new employeesAddFormPaneController();
 	public static ControllerPane getInstance() {
 		return INSTANCE;
 	}
@@ -46,7 +46,7 @@ public class employeesAddFormPane implements ControllerPane, Initializable {
 	EmployeeManager employeemanager = new EmployeeManager();
 	OfficeManager officemanager = new OfficeManager();
 	
-	private ComboBox<?> officenameCombo = getComboboxForm(officemanager.getAllName(),240,230);
+	private ComboBox<?> officenameCombo = getComboboxForm(officemanager.getAllName(),200,230);
 	
 	@Override
 	public void generatePane(Pane pane, String fxml, String style, int userID) {

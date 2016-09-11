@@ -2,7 +2,7 @@ package com.plox.esportsystem.model.entities;
 
 public class Office implements Entity {
 	int id;
-	String name;
+	public String name;
 	
 	public String getName() {
 		return name;

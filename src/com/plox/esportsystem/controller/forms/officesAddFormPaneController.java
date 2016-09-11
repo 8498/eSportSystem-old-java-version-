@@ -15,9 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public class officesAddFormPane implements ControllerPane, Initializable {
+public class officesAddFormPaneController implements ControllerPane, Initializable {
 
-	private final static officesAddFormPane INSTANCE = new officesAddFormPane();
+	private final static officesAddFormPaneController INSTANCE = new officesAddFormPaneController();
 	
 	public static ControllerPane getInstance() {
 		return INSTANCE;

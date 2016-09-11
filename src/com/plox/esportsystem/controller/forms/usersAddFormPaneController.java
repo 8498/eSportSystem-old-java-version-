@@ -6,19 +6,23 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.plox.esportsystem.controller.ControllerPane;
+import com.plox.esportsystem.model.entities.RoleManager;
 import com.plox.esportsystem.model.entities.UserManager;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public class usersAddFormPane implements Initializable, ControllerPane {
+public class usersAddFormPaneController implements Initializable, ControllerPane {
 
-	private final static usersAddFormPane INSTANCE = new usersAddFormPane();
+	private final static usersAddFormPaneController INSTANCE = new usersAddFormPaneController();
 	
 	public static ControllerPane getInstance() {
 		return INSTANCE;
@@ -33,11 +37,13 @@ public class usersAddFormPane implements Initializable, ControllerPane {
 	private Label passwordLabel = getLabelForm("Hasło:",130,140);
 	private PasswordField passwordField = getPasswordfieldForm(200,140);
 	private Label roleLabel = getLabelForm("Rola:",130,170);
-	private TextField roleField = getTextfieldForm(200,170);
 	
 	private Button submitButton = getSubmitButton(240,300);
 	
 	UserManager usermanager = new UserManager();
+	RoleManager rolemanager = new RoleManager();
+	
+	private ComboBox<?> roleCombo = getComboboxForm(rolemanager.getAllName(),200,170);
 	
 	@Override
 	public void generatePane(Pane pane, String fxml, String style, int userID) {
@@ -61,7 +67,7 @@ public class usersAddFormPane implements Initializable, ControllerPane {
         		passwordLabel,
         		passwordField,
         		roleLabel,
-        		roleField,
+        		roleCombo,
         		submitButton);
         
         addUser();
@@ -106,6 +112,19 @@ public class usersAddFormPane implements Initializable, ControllerPane {
 		return passwordfield;
 	}
 	
+	private ComboBox<String> getComboboxForm(ArrayList<?> arraylist, int posx, int posy)
+	{
+		ComboBox<String> combobox = new ComboBox<String>();
+		
+		ObservableList<String> bbservablelist = (ObservableList<String>) FXCollections.observableArrayList(arraylist);
+		
+		combobox.setItems(bbservablelist);
+		combobox.setLayoutX(posx);
+		combobox.setLayoutY(posy);
+		
+		return combobox;
+	}
+	
 	private Button getSubmitButton(int posx, int posy) 
 	{
 		Button button = new Button("Dodaj");
@@ -123,7 +142,7 @@ public class usersAddFormPane implements Initializable, ControllerPane {
 			String login = loginField.getText();
 			String email = emailField.getText();
 			String password = passwordField.getText();
-			String role = roleField.getText();
+			String role = roleCombo.getValue().toString();
 			
 			ArrayList<String> data = new ArrayList<String>();
 			
@@ -133,7 +152,6 @@ public class usersAddFormPane implements Initializable, ControllerPane {
 			data.add(role);
 			
 			usermanager.create(data);
-			
 		});
 	}
 

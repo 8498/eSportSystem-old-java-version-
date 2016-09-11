@@ -1,11 +1,8 @@
 package com.plox.esportsystem.controller;
 
-import com.plox.esportsystem.controller.forms.employeesAddFormPane;
-import com.plox.esportsystem.controller.forms.officesAddFormPane;
-import com.plox.esportsystem.controller.forms.usersAddFormPane;
-import com.plox.esportsystem.controller.tables.employeesTablePaneController;
-import com.plox.esportsystem.controller.tables.officesTablePaneController;
-import com.plox.esportsystem.controller.tables.userTablePaneController;
+
+import com.plox.esportsystem.controller.forms.*;
+import com.plox.esportsystem.controller.tables.*;
 import com.plox.esportsystem.factories.AbstractFactory;
 import com.plox.esportsystem.main.ControllerType;
 import com.plox.esportsystem.main.PaneType;
@@ -36,11 +33,11 @@ public class ControllerPaneFactory extends AbstractFactory {
 			case officesTablePane:
 				return controllerPane = officesTablePaneController.getInstance();
 			case officesAddFormPane:
-				return controllerPane = officesAddFormPane.getInstance();
+				return controllerPane = officesAddFormPaneController.getInstance();
 			case employeesAddFormPane:
-				return controllerPane = employeesAddFormPane.getInstance();
+				return controllerPane = employeesAddFormPaneController.getInstance();
 			case usersAddFormPane:
-				return controllerPane = usersAddFormPane.getInstance();
+				return controllerPane = usersAddFormPaneController.getInstance();
 			default:
 				
 		}

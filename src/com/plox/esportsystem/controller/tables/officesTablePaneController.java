@@ -1,6 +1,7 @@
 package com.plox.esportsystem.controller.tables;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -31,9 +32,12 @@ public class officesTablePaneController implements Initializable, ControllerPane
 	}
 
 	private Pane newpane;
+	private int selectedItemId;
 	
 	@Override
 	public void generatePane(Pane pane, String fxml, String style, int userID) {
+		
+		TableView<?> tableview = getTableView();
 		
 		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource(fxml));
         fxmlloader.setController(this);
@@ -46,8 +50,24 @@ public class officesTablePaneController implements Initializable, ControllerPane
 		}
         newpane.getStylesheets().add(style);
         
-        newpane.getChildren().add(getTableView());
+        tableview.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+            	try {
+            		Field field = newSelection.getClass().getDeclaredField("id");
+            		field.setAccessible(true);
+            		Object value = field.get(newSelection);
+            		
+            		selectedItemId = (int) value;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
+        
+        newpane.getChildren().add(tableview);
         newpane.getChildren().add(getAddButton(pane));
+        newpane.getChildren().add(getDeleteButton());
         
         pane.getChildren().add(newpane);
 	}
@@ -60,6 +80,7 @@ public class officesTablePaneController implements Initializable, ControllerPane
 	
 	@SuppressWarnings("unchecked")
 	private TableView<?> getTableView() {
+		
 		OfficeManager officeManager = new OfficeManager();
 		
 		TableView<Office> officesTable = new TableView<Office>();
@@ -79,6 +100,7 @@ public class officesTablePaneController implements Initializable, ControllerPane
 	    officesTable.setItems(offices);
 	    
 	    officesTable.setPrefSize(580, 380);
+	    
 		return officesTable;
 	}
 	
@@ -96,5 +118,21 @@ public class officesTablePaneController implements Initializable, ControllerPane
         });
         
 		return addFormButton;
+	}
+	
+	private Button getDeleteButton()
+	{
+		Button deleteFormButton = new Button("Usuń");
+		
+		OfficeManager officemanager = new OfficeManager();
+		
+		deleteFormButton.autosize();
+		deleteFormButton.setTranslateY(400);
+		deleteFormButton.setTranslateX(200);
+		deleteFormButton.setOnMouseClicked((e) -> {
+			officemanager.delete(selectedItemId);
+		});
+		
+		return deleteFormButton;
 	}
 }

@@ -135,7 +135,9 @@ public class UserManager implements EntityManager {
 		
 		try {
 			stmt = connection.con.createStatement();
-			query = "DELETE FROM `users` WHERE id='"+id+"'";
+			query = "DELETE FROM `users` WHERE id ='"+id+"'";
+			stmt.executeUpdate(query);
+			query = "DELETE FROM `roles_users` WHERE user_id ='"+id+"'";
 			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

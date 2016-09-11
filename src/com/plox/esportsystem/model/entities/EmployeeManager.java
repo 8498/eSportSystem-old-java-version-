@@ -141,6 +141,8 @@ public class EmployeeManager implements EntityManager {
 			stmt = connection.con.createStatement();
 			query = "DELETE FROM `employees` WHERE id='"+id+"'";
 			stmt.executeUpdate(query);
+			query = "DELETE FROM `office_employee` WHERE employee_id ='"+id+"'";
+			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
