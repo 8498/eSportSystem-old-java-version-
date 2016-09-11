@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.plox.esportsystem.config.Connection;
 
@@ -15,7 +16,7 @@ public class OfficeManager implements EntityManager {
 	
 	@Override
 	public ArrayList<Office> getAll() {
-ArrayList<Office> officeList = new ArrayList<Office>();
+		ArrayList<Office> officeList = new ArrayList<Office>();
 		
 		connection.createConnection();
 		try {
@@ -111,6 +112,18 @@ ArrayList<Office> officeList = new ArrayList<Office>();
 		}
 		connection.closeConnection();
 
+	}
+	
+	public ArrayList<String> getAllName()
+	{
+		Iterator<Office> iterator = getAll().iterator();
+		ArrayList<String> arraylist = new ArrayList<String>();
+		
+		while(iterator.hasNext())
+		{
+			arraylist.add(iterator.next().getName());
+		}
+		return arraylist;
 	}
 
 }

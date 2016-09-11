@@ -5,6 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.plox.esportsystem.controller.ControllerPane;
+import com.plox.esportsystem.factories.AbstractFactory;
+import com.plox.esportsystem.factories.FactoryProducer;
+import com.plox.esportsystem.main.PaneType;
+import com.plox.esportsystem.main.Type;
 import com.plox.esportsystem.model.entities.Office;
 import com.plox.esportsystem.model.entities.OfficeManager;
 
@@ -43,7 +47,7 @@ public class officesTablePaneController implements Initializable, ControllerPane
         newpane.getStylesheets().add(style);
         
         newpane.getChildren().add(getTableView());
-        newpane.getChildren().add(getAddButton());
+        newpane.getChildren().add(getAddButton(pane));
         
         pane.getChildren().add(newpane);
 	}
@@ -78,14 +82,17 @@ public class officesTablePaneController implements Initializable, ControllerPane
 		return officesTable;
 	}
 	
-	public Button getAddButton()
+	private Button getAddButton(Pane CenterPane)
 	{
-		Button addFormButton = new Button("Dodaj");
+		Button addFormButton = new Button("Dodaj stanowisko");
 		
 		addFormButton.autosize();
 		addFormButton.setTranslateY(400);
         addFormButton.setOnMouseClicked((e) -> {
-        	
+        	CenterPane.getChildren().clear();
+			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
+			ControllerPane controller = ControllerPaneFactory.getController(PaneType.officesAddFormPane);
+			controller.generatePane(CenterPane, "../../view/addFormPane.fxml", "com/plox/esportsystem/supply/css/application.css", 0);
         });
         
 		return addFormButton;

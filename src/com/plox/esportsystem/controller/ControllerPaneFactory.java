@@ -1,5 +1,7 @@
 package com.plox.esportsystem.controller;
 
+import com.plox.esportsystem.controller.forms.employeesAddFormPane;
+import com.plox.esportsystem.controller.forms.officesAddFormPane;
 import com.plox.esportsystem.controller.tables.employeesTablePaneController;
 import com.plox.esportsystem.controller.tables.officesTablePaneController;
 import com.plox.esportsystem.controller.tables.userTablePaneController;
@@ -32,6 +34,12 @@ public class ControllerPaneFactory extends AbstractFactory {
 				return controllerPane = employeesTablePaneController.getInstance();
 			case officesTablePane:
 				return controllerPane = officesTablePaneController.getInstance();
+			case officesAddFormPane:
+				return controllerPane = officesAddFormPane.getInstance();
+			case employeesAddFormPane:
+				return controllerPane = employeesAddFormPane.getInstance();
+			case usersAddFormPane:
+				return controllerPane = usersAddFormPane.getInstance();
 			default:
 				
 		}

@@ -87,14 +87,28 @@ public class EmployeeManager implements EntityManager {
 		String phone = data.get(4);
 		String office_name = data.get(5);
 		
+		int employee_id;
+		int office_id;
+		
+		ResultSet rs;
 		connection.createConnection();
 		try {
 			stmt = connection.con.createStatement();
-			query = "INSERT INTO `employees` (`firstname`, `lastname`, `email`, `birthdate`, `phone`) VALUES ('"+firstname+"','"+lastname+"','"+email+"','"+birthdate+"','"+phone+"');"
-					+ "SET @employee_id = LAST_INSERT_ID();"
-					+ "SELECT id INTO @office_id FROM offices WHERE name = '"+office_name+"';"
-					+ "INSERT INTO `office_employee` (`employee_id`,`office_id`) VALUES (@employee_id,@office_id);";
+			
+			query = "INSERT INTO `employees` (`firstname`, `lastname`, `email`, `birthdate`, `phone`) VALUES ('"+firstname+"','"+lastname+"','"+email+"','"+birthdate+"','"+phone+"');";
 			stmt.executeUpdate(query);
+			
+			rs = stmt.executeQuery("SELECT id FROM employees WHERE email = '"+email+"'");
+			rs.next();
+			employee_id = rs.getInt("id");
+			
+			rs = stmt.executeQuery("SELECT id FROM offices WHERE name = '"+office_name+"'");
+			rs.next();
+			office_id = rs.getInt("id");
+			
+			query = "INSERT INTO `office_employee` (`employee_id`,`office_id`) VALUES ("+employee_id+","+office_id+")";
+			stmt.executeUpdate(query);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

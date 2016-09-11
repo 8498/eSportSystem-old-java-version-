@@ -5,6 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.plox.esportsystem.controller.ControllerPane;
+import com.plox.esportsystem.factories.AbstractFactory;
+import com.plox.esportsystem.factories.FactoryProducer;
+import com.plox.esportsystem.main.PaneType;
+import com.plox.esportsystem.main.Type;
 import com.plox.esportsystem.model.entities.Employee;
 import com.plox.esportsystem.model.entities.EmployeeManager;
 
@@ -43,7 +47,7 @@ public class employeesTablePaneController implements ControllerPane, Initializab
         newpane.getStylesheets().add(style);
         
         newpane.getChildren().add(getTableView());
-        newpane.getChildren().add(getAddButton());
+        newpane.getChildren().add(getAddButton(pane));
         
         pane.getChildren().add(newpane);
 		
@@ -96,18 +100,21 @@ public class employeesTablePaneController implements ControllerPane, Initializab
 
 	    employeesTable.setItems(employees);
 	    
-	    employeesTable.setPrefSize(580, 380);;
+	    employeesTable.setPrefSize(580, 380);
 		return employeesTable;
 	}
 
-	public Button getAddButton()
+	private Button getAddButton(Pane CenterPane)
 	{
-		Button addFormButton = new Button("Dodaj");
+		Button addFormButton = new Button("Dodaj pracownika");
 		
 		addFormButton.autosize();
 		addFormButton.setTranslateY(400);
         addFormButton.setOnMouseClicked((e) -> {
-        	
+        	CenterPane.getChildren().clear();
+			AbstractFactory ControllerPaneFactory = FactoryProducer.getFactory(Type.Pane);
+			ControllerPane controller = ControllerPaneFactory.getController(PaneType.employeesAddFormPane);
+			controller.generatePane(CenterPane, "../../view/addFormPane.fxml", "com/plox/esportsystem/supply/css/application.css", 0);
         });
         
 		return addFormButton;

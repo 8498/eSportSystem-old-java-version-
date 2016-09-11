@@ -93,7 +93,7 @@ public class userTablePaneController implements ControllerPane, Initializable {
 	
 	public Button getAddButton()
 	{
-		Button addFormButton = new Button("Dodaj");
+		Button addFormButton = new Button("Dodaj użytkownika");
 		
 		addFormButton.autosize();
 		addFormButton.setTranslateY(400);
