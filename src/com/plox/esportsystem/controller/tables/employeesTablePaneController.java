@@ -12,7 +12,6 @@ import com.plox.esportsystem.main.PaneType;
 import com.plox.esportsystem.main.Type;
 import com.plox.esportsystem.model.entities.Employee;
 import com.plox.esportsystem.model.entities.EmployeeManager;
-import com.plox.esportsystem.model.entities.UserManager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -10,7 +10,6 @@ import com.plox.esportsystem.factories.AbstractFactory;
 import com.plox.esportsystem.factories.FactoryProducer;
 import com.plox.esportsystem.main.PaneType;
 import com.plox.esportsystem.main.Type;
-import com.plox.esportsystem.model.entities.OfficeManager;
 import com.plox.esportsystem.model.entities.User;
 import com.plox.esportsystem.model.entities.UserManager;
 

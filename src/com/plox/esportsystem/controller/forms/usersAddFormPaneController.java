@@ -116,6 +116,7 @@ public class usersAddFormPaneController implements Initializable, ControllerPane
 	{
 		ComboBox<String> combobox = new ComboBox<String>();
 		
+		@SuppressWarnings("unchecked")
 		ObservableList<String> bbservablelist = (ObservableList<String>) FXCollections.observableArrayList(arraylist);
 		
 		combobox.setItems(bbservablelist);

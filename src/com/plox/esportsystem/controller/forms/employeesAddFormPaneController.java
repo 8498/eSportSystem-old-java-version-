@@ -121,6 +121,7 @@ public class employeesAddFormPaneController implements ControllerPane, Initializ
 	{
 		ComboBox<String> combobox = new ComboBox<String>();
 		
+		@SuppressWarnings("unchecked")
 		ObservableList<String> bbservablelist = (ObservableList<String>) FXCollections.observableArrayList(arraylist);
 		
 		combobox.setItems(bbservablelist);
